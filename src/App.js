@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import List from './components/List';
+import Add from './components/Add';
+import { createContext, useContext, useState } from 'react';
+
+
 
 function App() {
-  return (
+  // const [task , setTask] = useState("abc");
+  const task= [{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},];
+
+const TasksContext = createContext("asd");
+  return ( 
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+    <TasksContext.Provider value={ task }>
+    <Add/>
+     {`${useContext(TasksContext)}`}
+    <List tasks={ task }/>
+    </TasksContext.Provider>
     </div>
   );
 }
