@@ -1,22 +1,24 @@
 import './App.css';
 import List from './components/List';
 import Add from './components/Add';
-import { createContext, useContext, useState } from 'react';
+import { createContext,  useEffect, useState } from 'react';
 
 
 
+export const TasksContext = createContext();
 function App() {
-  // const [task , setTask] = useState("abc");
-  const task= [{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},];
+  const [task , setTask] = useState([]);
+  // const task= [{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},];
+// var task  =[["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],];
+// task = [...task , ["new" , "new description"]];
+ 
 
-const TasksContext = createContext("asd");
   return ( 
     <div className="App">
-      
-    <TasksContext.Provider value={ task }>
+    <TasksContext.Provider value={ {task,setTask} }>
     <Add/>
-     {`${useContext(TasksContext)}`}
-    <List tasks={ task }/>
+
+    <List />
     </TasksContext.Provider>
     </div>
   );
