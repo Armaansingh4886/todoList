@@ -6,7 +6,8 @@ grid-template-columns: 72vw 28vw;
 .add {
   grid-row: 1/1;
 /* grid-column: 1/9; */
-  background-color: rgb(81, 119, 81);
+  background-color: rgb(183, 224, 218); 
+  /* rgb(81, 119, 81); */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -16,6 +17,12 @@ grid-template-columns: 72vw 28vw;
   display: flex;
   flex-direction: column;
   align-items: center;
+width: 45vw;
+margin: auto;
+  border-radius: 50px;
+background: #2555a2;
+box-shadow:  13px 13px 26px #0f2241,
+             -13px -13px 26px #3b88ff;
 
 }
 .add input,button,textarea{
@@ -70,7 +77,32 @@ grid-template-columns: 72vw 28vw;
   border-radius: 20px;
   
   padding: 0 10px;
+  background: #509b6d;
+  transition: max-height 2s ease-in-out;
+  box-shadow:  -8px 8px 16px #203e2c,
+               8px -8px 16px #80f8ae;
 }
-
-.listitems h3,p{
+.listitem:hover{
+  max-height: 500px;
+}
+.listitem:hover div{
+  display: grid;
+}
+.icons{
+  display: none;
+  grid-template-columns: 50% 50%;
+  text-align: center;
+}
+.icon{
+  margin: 5px;
+  padding: 7px;
+  font-size: xx-large;
+  margin-bottom: 20px;
+  color: white;
+}
+.icon-delete{
+  background-color: #c92b2bf5;
+}
+.icon-update{
+  background-color: #078b07;
 }

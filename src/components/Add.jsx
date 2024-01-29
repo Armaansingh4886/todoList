@@ -2,19 +2,35 @@ import React, { useContext, useEffect, useState } from 'react'
 import { TasksContext } from '../App';
 
 const Add =  () => {
-const { task,setTask} = useContext(TasksContext);
+const { task,setTask,updateTask,setUpdateTask} = useContext(TasksContext);
 
   // task = [...task , ["new" , "new description"]];
 
   const [title,setTitle] = useState("");
   const [description ,setDescription] = useState("");
+var count;
   const handleClick = (event)=>{
+
     event.preventDefault();
+  if(updateTask.length < 1){
     setTask([...task,[title,description]]);
     setTitle("");
     setDescription("");
+  }else{
+    const tas = task;
+    tas[updateTask[2]]=[title,description];
+    setTask(tas);
+    setTitle("");
+    setDescription("");
+    setUpdateTask([]);
   }
+}
 
+  useEffect(()=>{
+    setTitle(updateTask[0]);
+    setDescription(updateTask[1]);
+
+  },[updateTask])
   return (
     <div className='add'>
       <form onSubmit={handleClick} >
@@ -22,7 +38,7 @@ const { task,setTask} = useContext(TasksContext);
       <input type='text' required placeholder="Title..." onChange={(e)=>{setTitle(e.target.value)}} value = {title}></input>
       <label>Description</label>
       <textarea placeholder='Description...' onChange={(e)=>{setDescription(e.target.value)}} value={description}></textarea>
-      <button type="submit"  >add to list</button>
+      <button type="submit"  >add to list{count}</button>
    </form>
 
      

@@ -1,21 +1,30 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { TasksContext } from '../App'
 
 
 const ListItem = (props) => {
-const {task,setTask} = useContext(TasksContext);
-const id = props.name;
+const {task,setTask,updateTask , setUpdateTask} = useContext(TasksContext);
 const handleDelete =() =>{
   console.log(props.name)
-  const tas = task;
   setTask(task.filter((tasks)=> task.indexOf(tasks) !== props.name));
 }
+const handleUpdate = ()=>{
+  setUpdateTask([task[props.name][0],task[props.name][1],props.name]);
+}
+
+
+
+
   return (
     <div className='listitem'>
-      {props.name}
+      {/* {props.name} */}
       <h3>{props.title}</h3>
       <p>{props.desc}</p>
-<button onClick={handleDelete}>Delete</button>
+      <div className="icons">
+<i className='icon icon-delete' onClick={handleDelete}><i class="fa-solid fa-trash"></i></i>
+
+<i className='icon icon-update' onClick={handleUpdate}><i class="fa-regular fa-pen-to-square"></i></i>
+</div>
     </div>
   )
 }
