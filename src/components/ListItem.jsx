@@ -5,7 +5,7 @@ import { TasksContext } from '../App'
 const ListItem = (props) => {
   
   const [currtime, setCurrtime] = useState(new Date());
-const {task,setTask,updateTask , setUpdateTask} = useContext(TasksContext);
+const {task,setTask , setUpdateTask} = useContext(TasksContext);
 const handleDelete =() =>{
   console.log(props.name)
   setTask(task.filter((tasks)=> task.indexOf(tasks) !== props.name));
