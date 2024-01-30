@@ -10,24 +10,21 @@ export const TasksContext = createContext();
 function App() {
   const [task , setTask] = useState([]);
   const [updateTask , setUpdateTask] = useState([]);
+  const [rerender,setrerender] = useState(false);
   // const task= [{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},{title: "title1",desc:"this is description1"},];
 // var task  =[["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],["title" , "descriptoinasd adsf sdfdgfdsfg dfgdsf"],];
 // task = [...task , ["new" , "new description"]];
  
-var count=0;
 
   return ( 
     <div className="App">
-    <TasksContext.Provider value={ {task,setTask,updateTask,setUpdateTask} }>
+    <TasksContext.Provider value={ {task,setTask,updateTask,setUpdateTask,rerender,setrerender} }>
       
-     { useEffect(()=>{
-        count++;
-      },[setTask])}
-      a{count}a
+    
     <Add/>
     {useEffect(()=>{
       <h1>updated</h1>
-    },[setTask])}
+    },[task])}
     <List />
     </TasksContext.Provider>
     </div>

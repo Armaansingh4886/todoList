@@ -6,7 +6,7 @@ grid-template-columns: 72vw 28vw;
 .add {
   grid-row: 1/1;
 /* grid-column: 1/9; */
-  background-color: rgb(183, 224, 218); 
+  background-color: rgb(77, 133, 193); 
   /* rgb(81, 119, 81); */
   height: 100vh;
   display: flex;
@@ -78,9 +78,13 @@ box-shadow:  13px 13px 26px #0f2241,
   
   padding: 0 10px;
   background: #509b6d;
-  transition: max-height 2s ease-in-out;
-  box-shadow:  -8px 8px 16px #203e2c,
-               8px -8px 16px #80f8ae;
+   transition: max-height 2s ease-in-out;
+   box-shadow:  -8px 8px 16px #203e2c,
+               8px -8px 16px #80f8ae; 
+}
+.listitem p{
+  width: 100%;
+ 
 }
 .listitem:hover{
   max-height: 500px;
@@ -94,7 +98,7 @@ box-shadow:  13px 13px 26px #0f2241,
   text-align: center;
 }
 .icon{
-  margin: 5px;
+  margin: 0 3px;
   padding: 7px;
   font-size: xx-large;
   margin-bottom: 20px;
@@ -102,7 +106,14 @@ box-shadow:  13px 13px 26px #0f2241,
 }
 .icon-delete{
   background-color: #c92b2bf5;
+  border-radius: 0 0 0 20px ;
 }
 .icon-update{
   background-color: #078b07;
+  
+  border-radius: 0 0  20px 0;
+}
+.timer{
+  text-align: right;
+  padding: 10px;
 }

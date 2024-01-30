@@ -8,12 +8,13 @@ const { task,setTask,updateTask,setUpdateTask} = useContext(TasksContext);
 
   const [title,setTitle] = useState("");
   const [description ,setDescription] = useState("");
-var count;
   const handleClick = (event)=>{
 
     event.preventDefault();
   if(updateTask.length < 1){
-    setTask([...task,[title,description]]);
+    
+ const count = new Date();
+    setTask([...task,[title,description,count.getTime()]]);
     setTitle("");
     setDescription("");
   }else{
@@ -31,14 +32,17 @@ var count;
     setDescription(updateTask[1]);
 
   },[updateTask])
+
+  
   return (
     <div className='add'>
+      
       <form onSubmit={handleClick} >
       <label >Title</label>
       <input type='text' required placeholder="Title..." onChange={(e)=>{setTitle(e.target.value)}} value = {title}></input>
       <label>Description</label>
       <textarea placeholder='Description...' onChange={(e)=>{setDescription(e.target.value)}} value={description}></textarea>
-      <button type="submit"  >add to list{count}</button>
+      <button type="submit"  >add to list</button>
    </form>
 
      
