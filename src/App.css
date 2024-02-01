@@ -6,7 +6,7 @@ grid-template-columns: 72vw 28vw;
 .add {
   grid-row: 1/1;
 /* grid-column: 1/9; */
-  background-color: rgb(77, 133, 193); 
+  background-color: #b080c2; 
   /* rgb(81, 119, 81); */
   height: 100vh;
   display: flex;
@@ -20,9 +20,9 @@ grid-template-columns: 72vw 28vw;
 width: 45vw;
 margin: auto;
   border-radius: 50px;
-background: #2555a2;
-box-shadow:  13px 13px 26px #0f2241,
-             -13px -13px 26px #3b88ff;
+background: #eddcf2;
+/* box-shadow:  13px 13px 26px #0f2241,
+             -13px -13px 26px #3b88ff; */
 
 }
 .add input,button,textarea{
@@ -65,7 +65,7 @@ box-shadow:  13px 13px 26px #0f2241,
   grid-row: 1/1;
   height: 100vh;
  /* grid-column:9/12; */
-  background-color: rgb(183, 224, 218);
+  background-color: #d2b2dd;
   display: flex;
   flex-direction: column;
   overflow: scroll;
@@ -77,10 +77,10 @@ box-shadow:  13px 13px 26px #0f2241,
   border-radius: 20px;
   
   padding: 0 10px;
-  background: #509b6d;
+  background: #8b549e;
    transition: max-height 2s ease-in-out;
-   box-shadow:  -8px 8px 16px #203e2c,
-               8px -8px 16px #80f8ae; 
+   /* box-shadow:  -8px 8px 16px #203e2c,
+               8px -8px 16px #80f8ae;  */
 }
 .listitem p{
   width: 100%;
