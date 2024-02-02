@@ -117,3 +117,21 @@ background: #eddcf2;
   text-align: right;
   padding: 10px;
 }
+
+.search{
+  padding: 10px;
+  margin: 10px;
+  border-radius: 7px;
+  background-color: #b080c2;
+  border: 0px;
+}
+
+.search::placeholder{
+  font-size: 17px;
+  color: black;
+  
+}
+
+.search:focus{
+  border: 0px;
+}

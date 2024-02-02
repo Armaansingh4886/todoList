@@ -2,6 +2,9 @@ import './App.css';
 import List from './components/List';
 import Add from './components/Add';
 import { createContext,  useEffect,  useState } from 'react';
+import { DndProvider } from 'react-dnd';
+
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 
 
@@ -18,15 +21,15 @@ function App() {
 
   return ( 
     <div className="App">
+      <DndProvider  backend={HTML5Backend}>
     <TasksContext.Provider value={ {task,setTask,updateTask,setUpdateTask,rerender,setrerender} }>
       
     
     <Add/>
-    {useEffect(()=>{
-      <h1>updated</h1>
-    },[task])}
+    
     <List />
     </TasksContext.Provider>
+    </DndProvider>
     </div>
   );
 }

@@ -1,9 +1,15 @@
 import React, { useContext, useEffect ,useState} from 'react'
 import { TasksContext } from '../App'
-
+import { useDrag } from 'react-dnd';
 
 const ListItem = (props) => {
-  
+  const id = props.key;
+  const index = props.name;
+    const [, drag] = useDrag({
+      type: 'ITEM',
+      item: { id, index },
+    });
+
   const [currtime, setCurrtime] = useState(new Date());
 const {task,setTask , setUpdateTask} = useContext(TasksContext);
 const handleDelete =() =>{
@@ -35,7 +41,7 @@ return Math.floor(timediff/60)+" min ago";
   }
 }
   return (
-    <div className='listitem'>
+    <div  ref={drag} className='listitem'>
       {/* {props.name} */}
       
       <h3>{props.title}</h3>
