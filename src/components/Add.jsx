@@ -14,7 +14,7 @@ const { task,setTask,updateTask,setUpdateTask} = useContext(TasksContext);
   if(updateTask.length < 1){
     
  const count = new Date();
-    setTask([...task,[title,description,count.getTime(),"false",0]]);
+    setTask([...task,[title,description,count.getTime(),false,0]]);
     setTitle("");
     setDescription("");
   }else{

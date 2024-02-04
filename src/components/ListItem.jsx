@@ -19,7 +19,11 @@ const handleDelete =() =>{
 const handleUpdate = ()=>{
   setUpdateTask([task[props.name][0],task[props.name][1],props.name]);
 }
-
+const handleDone = ()=>{
+  const tas = task;
+  tas[index][3]=!task[index][3];
+  setTask(tas);
+}
 useEffect(
   () => {
     const intervalId = setInterval(() => {
@@ -42,11 +46,12 @@ return Math.floor(timediff/60)+" min ago";
 }
   return (
     <div  ref={drag} className='listitem'>
-      {/* {props.name} */}
+      {/* {props.key} */}
+      {(task[props.name][3])&&<h1>js</h1>}
       <div className="options"><i class="fa-solid fa-ellipsis-vertical"></i>
       <div className="options-list">
         <ul>
-          <li className="done options-listitem">Mark as done</li>
+          <li className="done options-listitem" onClick={handleDone}>Mark as done</li>
           <li className="time options-listitem">Set due time</li>
         </ul>
 
