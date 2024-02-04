@@ -75,7 +75,7 @@ background: #eddcf2;
   background-color: rgb(72, 114, 117);
   margin: 10px;
   border-radius: 20px;
-  
+  position: relative;
   padding: 0 10px;
   background: #8b549e;
    transition: max-height 2s ease-in-out;
@@ -89,7 +89,7 @@ background: #eddcf2;
 .listitem:hover{
   max-height: 500px;
 }
-.listitem:hover div{
+.listitem:hover .icons{
   display: grid;
 }
 .icons{
@@ -131,6 +131,36 @@ background: #eddcf2;
   color: black;
   
 }
+
+.options{
+
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: flex;
+  /* font-size: 18px; */
+  flex-direction: row-reverse;
+}
+
+.options-list{
+  display: block;
+  background-color: grey;
+}
+.options-list ul{
+margin: 0px;
+list-style: none;
+padding: 0px;
+}
+
+.options-listitem{
+  padding: 5px;
+}
+.options:hover .options-list{
+  display: block;
+  
+  
+}
+
 
 .search:focus{
   border: 0px;

@@ -14,12 +14,12 @@ const { task,setTask,updateTask,setUpdateTask} = useContext(TasksContext);
   if(updateTask.length < 1){
     
  const count = new Date();
-    setTask([...task,[title,description,count.getTime()]]);
+    setTask([...task,[title,description,count.getTime(),"false",0]]);
     setTitle("");
     setDescription("");
   }else{
     const tas = task;
-    tas[updateTask[2]]=[title,description];
+    tas[updateTask[2]]=[title,description,task[updateTask[2]][2],task[updateTask[2]][3],task[updateTask[2]][4]];
     setTask(tas);
     setTitle("");
     setDescription("");

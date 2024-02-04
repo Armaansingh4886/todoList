@@ -43,7 +43,16 @@ return Math.floor(timediff/60)+" min ago";
   return (
     <div  ref={drag} className='listitem'>
       {/* {props.name} */}
+      <div className="options"><i class="fa-solid fa-ellipsis-vertical"></i>
+      <div className="options-list">
+        <ul>
+          <li className="done options-listitem">Mark as done</li>
+          <li className="time options-listitem">Set due time</li>
+        </ul>
+
+      </div>
       
+      </div>
       <h3>{props.title}</h3>
       <p>{props.desc}</p>
       <div className="timer"><i>{duration(props.time)}</i></div>
