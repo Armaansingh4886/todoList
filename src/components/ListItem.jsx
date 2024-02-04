@@ -1,4 +1,4 @@
-import React, { useContext, useEffect ,useState} from 'react'
+import React, { useContext, useEffect ,useRef,useState} from 'react'
 import { TasksContext } from '../App'
 import { useDrag } from 'react-dnd';
 
@@ -24,6 +24,28 @@ const handleDone = ()=>{
   tas[index][3]=!task[index][3];
   setTask(tas);
 }
+const optionList = useRef(null);
+const offBtn = useRef(null);
+const onBtn = useRef(null);
+
+const handleOn = ()=>{
+  if(optionList.current.style.display === "none"){
+  optionList.current.style.display="block";
+}
+if(optionList.current.style.display === "block"){
+optionList.current.style.display="none";
+}
+
+
+  // offBtn.current.style.dislay="block";
+  // onBtn.current.style.display="none";
+}
+// const handleOff = () =>{
+
+//   onBtn.current.style.display="block";
+//   optionList.current.style.display="none";
+//   offBtn.current.style.display="none";
+// }
 useEffect(
   () => {
     const intervalId = setInterval(() => {
@@ -48,11 +70,26 @@ return Math.floor(timediff/60)+" min ago";
     <div  ref={drag} className='listitem'>
       {/* {props.key} */}
       {(task[props.name][3])&&<h1>js</h1>}
-      <div className="options"><i class="fa-solid fa-ellipsis-vertical"></i>
-      <div className="options-list">
+      <div className="options"><i onClick={handleOn} ref={onBtn} class="fa-solid fa-ellipsis-vertical"></i>
+      {/* <i  ref={offBtn} class="fa-regular fa-circle-check"></i> */}
+      <div ref={optionList} className="options-list">
         <ul>
-          <li className="done options-listitem" onClick={handleDone}>Mark as done</li>
-          <li className="time options-listitem">Set due time</li>
+          <li className="done options-listitem" onClick={handleDone}><i class="fa-regular fa-circle-check"></i></li>
+          <li className="time options-listitem"><i class="fa-regular fa-hourglass-half"></i></li>
+          <li onClick={handleDelete} className="options-listitem"><i class="fa-solid fa-trash"></i></li>
+          <li onClick={handleUpdate} className="options-listitem"><i class="fa-regular fa-pen-to-square"></i></li>
+          {/* <form>
+            <input type="text" name="" id="" />
+            <select>
+              <option>Sec</option>
+              <option>Min</option>
+              <option>Hours</option>
+              <option>Days</option>
+              <option>Months</option>
+              <option>Years</option>
+            </select>
+          </form> */}
+         
         </ul>
 
       </div>
@@ -61,11 +98,11 @@ return Math.floor(timediff/60)+" min ago";
       <h3>{props.title}</h3>
       <p>{props.desc}</p>
       <div className="timer"><i>{duration(props.time)}</i></div>
-      <div className="icons">
+      {/* <div className="icons">
 <i className='icon icon-delete' onClick={handleDelete}><i class="fa-solid fa-trash"></i></i>
 
 <i className='icon icon-update' onClick={handleUpdate}><i class="fa-regular fa-pen-to-square"></i></i>
-</div>
+</div> */}
     </div>
   )
 }
