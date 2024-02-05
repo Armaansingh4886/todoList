@@ -28,24 +28,23 @@ const optionList = useRef(null);
 const offBtn = useRef(null);
 const onBtn = useRef(null);
 
+
+
 const handleOn = ()=>{
-  if(optionList.current.style.display === "none"){
-  optionList.current.style.display="block";
+
+optionList.current.classList.toggle("show");
+onBtn.current.style.display ="none";
+offBtn.current.style.display ="block";
+
 }
-if(optionList.current.style.display === "block"){
-optionList.current.style.display="none";
+const handleOff =()=>{
+
+  optionList.current.classList.toggle("show");
+  
+offBtn.current.style.display ="none";
+onBtn.current.style.display ="block";
 }
 
-
-  // offBtn.current.style.dislay="block";
-  // onBtn.current.style.display="none";
-}
-// const handleOff = () =>{
-
-//   onBtn.current.style.display="block";
-//   optionList.current.style.display="none";
-//   offBtn.current.style.display="none";
-// }
 useEffect(
   () => {
     const intervalId = setInterval(() => {
@@ -71,14 +70,14 @@ return Math.floor(timediff/60)+" min ago";
       {/* {props.key} */}
       {(task[props.name][3])&&<h1>js</h1>}
       <div className="options"><i onClick={handleOn} ref={onBtn} class="fa-solid fa-ellipsis-vertical"></i>
-      {/* <i  ref={offBtn} class="fa-regular fa-circle-check"></i> */}
+      <i onClick={handleOff} ref={offBtn} class="fa-solid fa-xmark"></i>
       <div ref={optionList} className="options-list">
         <ul>
           <li className="done options-listitem" onClick={handleDone}><i class="fa-regular fa-circle-check"></i></li>
           <li className="time options-listitem"><i class="fa-regular fa-hourglass-half"></i></li>
           <li onClick={handleDelete} className="options-listitem"><i class="fa-solid fa-trash"></i></li>
           <li onClick={handleUpdate} className="options-listitem"><i class="fa-regular fa-pen-to-square"></i></li>
-          {/* <form>
+          <form class="time-form">
             <input type="text" name="" id="" />
             <select>
               <option>Sec</option>
@@ -88,7 +87,7 @@ return Math.floor(timediff/60)+" min ago";
               <option>Months</option>
               <option>Years</option>
             </select>
-          </form> */}
+          </form>
          
         </ul>
 

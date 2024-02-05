@@ -148,6 +148,10 @@ background: #eddcf2;
   /* background-color: grey; */
   margin: 0 10px ;
 }
+.show{
+  display: block;
+}
+
 .options-list ul{
 margin: 0px;
 list-style: none;
@@ -178,4 +182,21 @@ display: flex;
 
 .search:focus{
   border: 0px;
+}
+
+.time-form{
+  position: absolute;
+  top: 28px;
+}
+.time-form input{
+  background: #8b549e;
+width: 30%;
+}
+.time-form select{
+  background: #8b549e;
+  width: 60%;;
+}
+
+.none{
+  display: none;
 }
