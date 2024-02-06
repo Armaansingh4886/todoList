@@ -25,7 +25,6 @@ const handleDone = ()=>{
   setTask(tas);
 }
 const optionList = useRef(null);
-const offBtn = useRef(null);
 const onBtn = useRef(null);
 
 
@@ -33,17 +32,11 @@ const onBtn = useRef(null);
 const handleOn = ()=>{
 
 optionList.current.classList.toggle("show");
-onBtn.current.style.display ="none";
-offBtn.current.style.display ="block";
+onBtn.current.classList.toggle("fa-xmark");
+// offBtn.current.style.display ="block";
 
 }
-const handleOff =()=>{
 
-  optionList.current.classList.toggle("show");
-  
-offBtn.current.style.display ="none";
-onBtn.current.style.display ="block";
-}
 
 useEffect(
   () => {
@@ -67,10 +60,10 @@ return Math.floor(timediff/60)+" min ago";
 }
   return (
     <div  ref={drag} className='listitem'>
+      <div className="blur"></div>
       {/* {props.key} */}
       {(task[props.name][3])&&<h1>js</h1>}
-      <div className="options"><i onClick={handleOn} ref={onBtn} class="fa-solid fa-ellipsis-vertical"></i>
-      <i onClick={handleOff} ref={offBtn} class="fa-solid fa-xmark"></i>
+      <div className="options"><i onClick={handleOn} ref={onBtn} class="fa-solid fa-ellipsis-vertical "></i>
       <div ref={optionList} className="options-list">
         <ul>
           <li className="done options-listitem" onClick={handleDone}><i class="fa-regular fa-circle-check"></i></li>
@@ -80,6 +73,7 @@ return Math.floor(timediff/60)+" min ago";
           <form class="time-form">
             <input type="text" name="" id="" />
             <select>
+              <option disabled>Time..</option>
               <option>Sec</option>
               <option>Min</option>
               <option>Hours</option>
