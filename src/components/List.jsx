@@ -23,7 +23,7 @@ const [, drop] = useDrop({
 })
 
         // console.log(task[0][0].includes(searchValue))
- const todolists = task.map((item,index)=>(searchValue===""||item[0].includes(searchValue))&&<ListItem key={index} name ={index} title={ item[0]} desc = { item[1]} time={ item[2]}/>)
+ const todolists = task.map((item,index)=>(searchValue===""||item[0].includes(searchValue))&&<ListItem key={index} name ={index} title={ item[0]} desc = { item[1]} time={ item[2]} duetime={item[4]}/>)
   return (
     <div ref={drop} className='list'>
       <input className="search" type="text"placeholder='search...' onChange={(e)=>{setSearchValue(e.target.value)}}/>

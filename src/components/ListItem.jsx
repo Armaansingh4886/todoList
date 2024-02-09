@@ -12,6 +12,15 @@ const ListItem = (props) => {
 
   const [currtime, setCurrtime] = useState(new Date());
 const {task,setTask , setUpdateTask} = useContext(TasksContext);
+
+const [duedate,setDuedate] = useState("");
+
+useEffect(()=>{
+ 
+
+console.log(task[props.name][4]=duedate);
+},[duedate]);
+
 const handleDelete =() =>{
   console.log(props.name)
   setTask(task.filter((tasks)=> task.indexOf(tasks) !== props.name));
@@ -26,15 +35,23 @@ const handleDone = ()=>{
 }
 const optionList = useRef(null);
 const onBtn = useRef(null);
-
-
+const blur = useRef(null);
+const dateform = useRef(null);
 
 const handleOn = ()=>{
 
 optionList.current.classList.toggle("show");
-onBtn.current.classList.toggle("fa-xmark");
 // offBtn.current.style.display ="block";
+onBtn.current.classList.toggle("fa-xmark");
 
+}
+
+const handleBlur =()=>{
+  
+blur.current.classList.toggle("blur");
+dateform.current.classList.toggle("show");
+optionList.current.classList.toggle("show");
+onBtn.current.classList.toggle("fa-xmark");
 }
 
 
@@ -48,9 +65,13 @@ useEffect(
     return () => clearInterval(intervalId);
   }, []
 )
-
+const handleDate =()=>{
+blur.current.classList.toggle("blur");
+dateform.current.classList.toggle("show");
+}
 
 const duration = (time)=>{
+  
   const timediff = Math.floor((currtime.getTime()-time)/1000)
   if(timediff<60){
     return timediff+" sec ago";
@@ -58,28 +79,50 @@ const duration = (time)=>{
 return Math.floor(timediff/60)+" min ago";
   }
 }
+const timeleft =()=>{
+  if(task[props.name][4][0] == undefined){
+    return "";
+  }
+  var time ="seconds";
+  if(task[props.name][4][1]==="min"){
+    time = "minutes";
+  }
+  if(task[props.name][4][1]==="hr"){
+    time = "hours";
+  }
+  if(task[props.name][4][1]==="da"){
+    time = "days";
+  }
+  if(task[props.name][4][1]==="mo"){
+    time = "months";
+  }
+  if(task[props.name][4][1]==="yr"){
+    time = "year";
+  }
+ return task[props.name][4][0]+ " "+time+" left";
+}
   return (
     <div  ref={drag} className='listitem'>
-      <div className="blur"></div>
+      <div ref={blur} onClick={handleBlur} classList="" ></div>
       {/* {props.key} */}
       {(task[props.name][3])&&<h1>js</h1>}
       <div className="options"><i onClick={handleOn} ref={onBtn} class="fa-solid fa-ellipsis-vertical "></i>
       <div ref={optionList} className="options-list">
         <ul>
           <li className="done options-listitem" onClick={handleDone}><i class="fa-regular fa-circle-check"></i></li>
-          <li className="time options-listitem"><i class="fa-regular fa-hourglass-half"></i></li>
+          <li className="time options-listitem" onClick={handleDate}><i class="fa-regular fa-hourglass-half"></i></li>
           <li onClick={handleDelete} className="options-listitem"><i class="fa-solid fa-trash"></i></li>
           <li onClick={handleUpdate} className="options-listitem"><i class="fa-regular fa-pen-to-square"></i></li>
-          <form class="time-form">
-            <input type="text" name="" id="" />
-            <select>
+          <form ref={dateform} class="time-form">
+            <input type="text" onChange={(e)=>{setDuedate([e.target.value,duedate[1]])}} value={duedate[0]} id="" />
+            <select onChange={(e)=>{setDuedate([duedate[0],e.target.value])}}>
               <option disabled>Time..</option>
-              <option>Sec</option>
-              <option>Min</option>
-              <option>Hours</option>
-              <option>Days</option>
-              <option>Months</option>
-              <option>Years</option>
+              <option value="sec"  >Sec</option>
+              <option value="min">Min</option>
+              <option value="hr">Hours</option>
+              <option value="da">Days</option>
+              <option value="mo">Months</option>
+              <option value="yr">Years</option>
             </select>
           </form>
          
@@ -90,6 +133,7 @@ return Math.floor(timediff/60)+" min ago";
       </div>
       <h3>{props.title}</h3>
       <p>{props.desc}</p>
+      <div className="timer"><i>{timeleft()}</i></div>
       <div className="timer"><i>{duration(props.time)}</i></div>
       {/* <div className="icons">
 <i className='icon icon-delete' onClick={handleDelete}><i class="fa-solid fa-trash"></i></i>
