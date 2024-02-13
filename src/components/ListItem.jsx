@@ -24,7 +24,7 @@ const ListItem = (props) => {
     setExample(example.filter((tasks) => example.indexOf(tasks) !== props.name));
   };
   const handleUpdate = () => {
-    setUpdateTask([task[props.name][0], task[props.name][1], props.name]);
+    setUpdateTask([example[props.name].title, props.name]);
   };
 
   const done1 = useRef(null);
@@ -156,7 +156,7 @@ const ListItem = (props) => {
                     </div>
                     <div class="col-auto m-1 p-0 todo-actions">
                         <div class="row d-flex flex-row align-items-center justify-content-end">
-                            <h5 class="m-0 p-0 px-2 col-md-2">
+                            <h5 class="m-0 p-0 px-2 col-md-2" onClick={handleUpdate}>
                                 <i class="fa fa-pencil text-info btn m-0 p-0" data-toggle="tooltip" data-placement="bottom" title="Edit todo"></i>
                             </h5>
                             <h5 class="m-0 p-0 px-2 col-md-2" onClick={handleDelete}>

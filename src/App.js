@@ -34,7 +34,7 @@ function App() {
       <DndProvider  backend={HTML5Backend}>
     <TasksContext.Provider value={ {task,setTask,updateTask,setUpdateTask,rerender,setrerender,example,setExample} }>
       
-    {task}
+    {/* {task} */}
     <Add/>
     
     <List />

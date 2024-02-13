@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState ,useRef} from 'react'
 import { TasksContext } from '../App';
 
 const Add =  () => {
@@ -20,9 +20,9 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
     setTitle("");
     setDescription("");
   }else{
-    const tas = task;
-    tas[updateTask[2]]=[title,description,task[updateTask[2]][2],task[updateTask[2]][3],task[updateTask[2]][4]];
-    setTask(tas);
+    const tas = example;
+    tas[updateTask[1]]={title:title,description:description,TimeOfCreation:example[updateTask[1]].TimeOfCreation,done:example[updateTask[1]].done,DueDate:example[updateTask[1]].DueDate};
+    setExample(tas);
     setTitle("");
     setDescription("");
     setUpdateTask([]);
@@ -34,6 +34,14 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
     setDescription(updateTask[1]);
 
   },[updateTask])
+  const dateform = useRef(null);
+  const calenderon = useRef(null);
+  const calenderoff = useRef(null);
+  const handleDueDate = ()=>{
+    dateform.current.classList.toggle("d-none");
+    calenderon.current.classList.toggle("d-none");
+    calenderoff.current.classList.toggle("d-none");
+  }
 
   
   return (
@@ -47,12 +55,13 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
                     </div>
                     <div class="col-auto m-0 px-2 d-flex align-items-center">
                         <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
-                        {/* <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded"  type="datetime-local" name="dandt" id="" /> */}
-                        <i class="fa fa-calendar my-2 px-1 text-primary btn due-date-button" data-toggle="tooltip" data-placement="bottom" title="Set a Due date"></i>
-                        <i class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
+                        <input ref={dateform} onChange={(e)=>{console.log(e.target.value)}} class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded d-none"  type="date" name="dandt" id="" />
+                        <i onClick={handleDueDate} ref={calenderon} class="fa fa-calendar my-2 px-1 text-primary btn due-date-button" data-toggle="tooltip" data-placement="bottom" title="Set a Due date"></i>
+                        <i onClick={handleDueDate} ref={calenderoff} class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
                     </div>
+                    
                     <div class="col-auto px-0 mx-0 mr-2">
-                        <button type="button" class="btn btn-primary" onClick={handleClick} >Add</button>
+                        <button type="button" class="btn btn-primary" onClick={handleClick} >{new Date().getMonth()}Add</button>
                     </div>
                 </div>
             </div>
