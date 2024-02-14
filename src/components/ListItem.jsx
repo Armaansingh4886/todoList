@@ -30,18 +30,18 @@ const ListItem = (props) => {
   const done1 = useRef(null);
   const done2 = useRef(null);
   const text =useRef(null);
+  const ddate = useRef(null);
   const handleDone = () => {
     const tas = example;
     tas[index].done = !example[index].done;
     setExample(tas);
+    
     done1.current.classList.toggle("d-none");
     done2.current.classList.toggle("d-none");
     text.current.classList.toggle("text-muted");
   };
   const optionList = useRef(null);
   const onBtn = useRef(null);
-  const blur = useRef(null);
-  const dateform = useRef(null);
 
   const handleOn = () => {
     optionList.current.classList.toggle("show");
@@ -49,12 +49,6 @@ const ListItem = (props) => {
     onBtn.current.classList.toggle("fa-xmark");
   };
 
-  const handleBlur = () => {
-    blur.current.classList.toggle("blur");
-    dateform.current.classList.toggle("show");
-    optionList.current.classList.toggle("show");
-    onBtn.current.classList.toggle("fa-xmark");
-  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -64,10 +58,7 @@ const ListItem = (props) => {
     // Cleanup the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
-  const handleDate = () => {
-    blur.current.classList.toggle("blur");
-    dateform.current.classList.toggle("show");
-  };
+  
 
   const duration = (time) => {
     const timediff = Math.floor((currtime.getTime() - time) / 1000);
@@ -133,24 +124,38 @@ const ListItem = (props) => {
 
   //   return tleft + " " + time + " left";
   // };
+useEffect(()=>{
+  
+  if(example[index].done){
+    done2.current.classList.remove("d-none");
+    text.current.classList.add("text-muted");
+  }
+  else{
+    done1.current.classList.remove("d-none");
+  }
+  if(example[index].DueDate===""){
+    ddate.current.classList.add("d-none");
+  }
+},[])
   return (
     <div >
 <div class="row px-3 align-items-center todo-item rounded">
                     <div class="col-auto m-1 p-0 d-flex align-items-center">
                         <h2 class="m-0 p-0 display-2" onClick={handleDone}>
-                            <i ref={done1} class="fa fa-square-o text-primary btn m-0 p-0 " data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i>
-                            <i ref={done2} class="fa fa-check-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as todo"></i>
+                            <i ref={done1} className="fa fa-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as complete"></i>
+                            <i ref={done2} className="fa fa-check-square-o text-primary btn m-0 p-0 d-none" data-toggle="tooltip" data-placement="bottom" title="Mark as todo"></i>
                         </h2>
                     </div>
                     <div class="col px-1 m-1 d-flex align-items-center">
                         <input ref={text} type="text" class="form-control form-control-lg border-0 edit-todo-input bg-transparent rounded px-3" readonly value={props.title} title={props.title} />
                         <input type="text" class="form-control form-control-lg border-0 edit-todo-input rounded px-3 d-none" value="Renew car insurance" />
                     </div>
-                    <div class="col-auto m-1 p-0 px-3 ">
+                    <div ref={ddate} class="col-auto m-1 p-0 px-3 ">
                         <div class="row">
                             <div class="col-auto d-flex align-items-center rounded bg-white border border-warning">
                                 <i class="fa fa-hourglass-2 my-2 px-2 text-warning btn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Due on date"></i>
                                 <h6 class="text my-2 pr-2">28th Jun 2020</h6>
+                                {/* {example[index].DueDate} */}
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,7 @@ import { useDrop } from 'react-dnd'
 const List = () => {
  const { task,setTask,example} = useContext(TasksContext);
  const [searchValue ,setSearchValue] = useState("");
+ const [filter,setFilter] = useState("all");
  
 const [, drop] = useDrop({
   accept: 'ITEM',
@@ -21,17 +22,26 @@ const [, drop] = useDrop({
     setTask(newItems);
   },
 })
+var todolists ;
 
         // console.log(task[0][0].includes(searchValue))
- const todolists = example.map((item,index)=>(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+        if(filter=="all"){
+          todolists = example.map((item,index)=>(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+       
+ }
+        if(filter == "completed"){
+           todolists = example.map((item,index)=>(item.done)&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+       
+        }
   return (
     <div ref={drop} className='list'>
        {/* <!-- View options section --> */}
+      
         <div class="row m-1 p-3 px-5 justify-content-end">
           <input className="search col-auto rounded bg-transparent border-1" type="text"placeholder='search...' onChange={(e)=>{setSearchValue(e.target.value)}}/>
             <div class="col-auto d-flex align-items-center">
                 <label class="text-secondary my-2 pr-2 view-opt-label">Filter</label>
-                <select class="custom-select custom-select-sm btn my-2">
+                <select onChange={(e)=>{setFilter(e.target.value)}}  class="custom-select custom-select-sm btn my-2">
                     <option value="all" selected>All</option>
                     <option value="completed">Completed</option>
                     <option value="active">Active</option>

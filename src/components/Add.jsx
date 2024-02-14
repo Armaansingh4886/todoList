@@ -8,6 +8,7 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
 
   const [title,setTitle] = useState("");
   const [description ,setDescription] = useState("");
+  const [dueDate , setDueDate] = useState("");
   const handleClick = (event)=>{
 
     event.preventDefault();
@@ -15,7 +16,7 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
     
  const count = new Date();
     setTask([...task,[title,description,count.getTime(),false,0]]);
-    setExample([...example,{title:title,description:description,TimeOfCreation:count.getTime(),done:false,DueDate:0}]);
+    setExample([...example,{title:title,description:description,TimeOfCreation:count.getTime(),done:false,DueDate:dueDate}]);
     // setExample([{name: "this"}]);
     setTitle("");
     setDescription("");
@@ -55,13 +56,14 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
                     </div>
                     <div class="col-auto m-0 px-2 d-flex align-items-center">
                         <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
-                        <input ref={dateform} onChange={(e)=>{console.log(e.target.value)}} class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded d-none"  type="date" name="dandt" id="" />
+                        <input ref={dateform} onChange={(e)=>{setDueDate(e.target.value)}} class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded d-none"  type="date" name="dandt" id="" />
                         <i onClick={handleDueDate} ref={calenderon} class="fa fa-calendar my-2 px-1 text-primary btn due-date-button" data-toggle="tooltip" data-placement="bottom" title="Set a Due date"></i>
                         <i onClick={handleDueDate} ref={calenderoff} class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
                     </div>
                     
                     <div class="col-auto px-0 mx-0 mr-2">
-                        <button type="button" class="btn btn-primary" onClick={handleClick} >{new Date().getMonth()}Add</button>
+                        <button type="button" class="btn btn-primary" onClick={handleClick} >Add</button>
+                        
                     </div>
                 </div>
             </div>
