@@ -1,30 +1,36 @@
-import React, { useContext,useState} from 'react'
+import React, { useContext,useState,useRef} from 'react'
 import ListItem from './ListItem'
 import{ TasksContext }from "../App"
 import { useDrop } from 'react-dnd'
 
 const List = () => {
- const { task,setTask,example} = useContext(TasksContext);
+ const { task,setTask,example,setExample} = useContext(TasksContext);
  const [searchValue ,setSearchValue] = useState("");
  const [filter,setFilter] = useState("all");
+ const [sort,setSort] = useState("added-date");
+ const [order,setOrder] = useState("asc");
  
-const [, drop] = useDrop({
-  accept: 'ITEM',
-  drop: (item, monitor) => {
-    const dragIndex = item.index;
-    const hoverIndex = task.findIndex((item) => item.id === monitor.getItem().id);
-    const newItems = [...task];
-
-    // Reorder the list
-    const [draggedItem] = newItems.splice(dragIndex, 1);
-    newItems.splice(hoverIndex, 0, draggedItem);
-
-    setTask(newItems);
-  },
-})
+const asc = useRef(null);
+const desc = useRef(null);
 var todolists ;
 
         // console.log(task[0][0].includes(searchValue))
+        if(sort=="added-date"){
+          if(order=="asc"){
+        setExample(example.sort((a,b)=> b.TimeOfCreation-a.TimeOfCreation));
+      }else{
+        setExample(example.sort((a,b)=> a.TimeOfCreation-b.TimeOfCreation));
+      }
+
+        }
+        // else if(sort=="due-date"){
+        //   setExample(example.sort((a,b)=> b.DueDate-a.DueDate));
+
+        // }
+
+
+
+
         if(filter=="all"){
           todolists = example.map((item,index)=>(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
        
@@ -33,8 +39,21 @@ var todolists ;
            todolists = example.map((item,index)=>(item.done)&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
        
         }
+        if(filter == "active"){
+          todolists = example.map((item,index)=>(!item.done)&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+      
+       }
+       if(filter == "has-due-date"){
+        todolists = example.map((item,index)=>(item.DueDate!="")&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+    
+     }
+
+    //  const handleOrder = ()=>{
+    //  asc.current.classList.toggle("d-none");
+    //  desc.current.classList.toggle("d-none");
+    //  }
   return (
-    <div ref={drop} className='list'>
+    <div  className='list'>
        {/* <!-- View options section --> */}
       
         <div class="row m-1 p-3 px-5 justify-content-end">
@@ -50,12 +69,14 @@ var todolists ;
             </div>
             <div class="col-auto d-flex align-items-center px-1 pr-3">
                 <label class="text-secondary my-2 pr-2 view-opt-label">Sort</label>
-                <select class="custom-select custom-select-sm btn my-2">
-                    <option value="added-date-asc" selected>Added date</option>
-                    <option value="due-date-desc">Due date</option>
+                <select onChange={(e)=>{setSort(e.target.value)}} class="custom-select custom-select-sm btn my-2">
+                    <option value="added-date" selected>Added date</option>
+                    <option value="due-date">Due date</option>
                 </select>
-                <i class="fa fa fa-sort-amount-asc text-info btn mx-0 px-0 pl-1" data-toggle="tooltip" data-placement="bottom" title="Ascending"></i>
-                <i class="fa fa fa-sort-amount-desc text-info btn mx-0 px-0 pl-1 d-none" data-toggle="tooltip" data-placement="bottom" title="Descending"></i>
+                <div onFocus={console.log("click")}>
+                <i ref={asc}  class="fa fa fa-sort-amount-asc text-info btn mx-0 px-0 pl-1" data-toggle="tooltip" data-placement="bottom" title="Ascending"></i>
+                <i ref={desc} class="fa fa fa-sort-amount-desc text-info btn mx-0 px-0 pl-1 d-none" data-toggle="tooltip" data-placement="bottom" title="Descending"></i>
+                </div>
             </div>
         </div>
       

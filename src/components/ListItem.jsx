@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { TasksContext } from "../App";
 import { useDrag } from "react-dnd";
+import { format } from "date-fns";
 
 const ListItem = (props) => {
   const id = props.key;
@@ -154,8 +155,8 @@ useEffect(()=>{
                         <div class="row">
                             <div class="col-auto d-flex align-items-center rounded bg-white border border-warning">
                                 <i class="fa fa-hourglass-2 my-2 px-2 text-warning btn" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Due on date"></i>
-                                <h6 class="text my-2 pr-2">28th Jun 2020</h6>
-                                {/* {example[index].DueDate} */}
+                                <h6 class="text my-2 pr-2">{example[index].DueDate}</h6>
+                                
                             </div>
                         </div>
                     </div>
