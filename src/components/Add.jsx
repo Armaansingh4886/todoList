@@ -20,6 +20,7 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
     // setExample([{name: "this"}]);
     setTitle("");
     setDescription("");
+    setDueDate("");
   }else{
     const tas = example;
     tas[updateTask[1]]={title:title,description:description,TimeOfCreation:example[updateTask[1]].TimeOfCreation,done:example[updateTask[1]].done,DueDate:example[updateTask[1]].DueDate};
@@ -56,7 +57,7 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
                     </div>
                     <div class="col-auto m-0 px-2 d-flex align-items-center">
                         <label class="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">Due date not set</label>
-                        <input ref={dateform} onChange={(e)=>{setDueDate(e.target.value)}} class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded d-none"  type="date" name="dandt" id="" />
+                        <input ref={dateform} onChange={(e)=>{setDueDate(e.target.value)}} value={dueDate} class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded d-none"  type="date" name="dandt" id="" />
                         <i onClick={handleDueDate} ref={calenderon} class="fa fa-calendar my-2 px-1 text-primary btn due-date-button" data-toggle="tooltip" data-placement="bottom" title="Set a Due date"></i>
                         <i onClick={handleDueDate} ref={calenderoff} class="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none" data-toggle="tooltip" data-placement="bottom" title="Clear Due date"></i>
                     </div>

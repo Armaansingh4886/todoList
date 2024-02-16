@@ -8,7 +8,7 @@ const List = () => {
  const [searchValue ,setSearchValue] = useState("");
  const [filter,setFilter] = useState("all");
  const [sort,setSort] = useState("added-date");
- const [order,setOrder] = useState("asc");
+ const [order,setOrder] = useState(true);
  
 const asc = useRef(null);
 const desc = useRef(null);
@@ -16,17 +16,23 @@ var todolists ;
 
         // console.log(task[0][0].includes(searchValue))
         if(sort=="added-date"){
-          if(order=="asc"){
+
+          if(!order){
         setExample(example.sort((a,b)=> b.TimeOfCreation-a.TimeOfCreation));
       }else{
         setExample(example.sort((a,b)=> a.TimeOfCreation-b.TimeOfCreation));
       }
 
         }
-        // else if(sort=="due-date"){
-        //   setExample(example.sort((a,b)=> b.DueDate-a.DueDate));
+        else if(sort=="due-date"){
+          if(!order){
+          setExample(example.sort((a,b)=> new Date(b.DueDate)-new Date(a.DueDate)));
+          }else{
+            
+          setExample(example.sort((a,b)=> new Date(a.DueDate)-new Date(b.DueDate)));
+          }
 
-        // }
+        }
 
 
 
@@ -48,10 +54,12 @@ var todolists ;
     
      }
 
-    //  const handleOrder = ()=>{
-    //  asc.current.classList.toggle("d-none");
-    //  desc.current.classList.toggle("d-none");
-    //  }
+     const handleOrder = ()=>{
+      setOrder(!order);
+      console.log(order);
+     asc.current.classList.toggle("d-none");
+     desc.current.classList.toggle("d-none");
+     }
   return (
     <div  className='list'>
        {/* <!-- View options section --> */}
@@ -73,7 +81,8 @@ var todolists ;
                     <option value="added-date" selected>Added date</option>
                     <option value="due-date">Due date</option>
                 </select>
-                <div onFocus={console.log("click")}>
+                <div onClick={handleOrder}>
+                  
                 <i ref={asc}  class="fa fa fa-sort-amount-asc text-info btn mx-0 px-0 pl-1" data-toggle="tooltip" data-placement="bottom" title="Ascending"></i>
                 <i ref={desc} class="fa fa fa-sort-amount-desc text-info btn mx-0 px-0 pl-1 d-none" data-toggle="tooltip" data-placement="bottom" title="Descending"></i>
                 </div>
