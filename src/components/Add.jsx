@@ -9,6 +9,16 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
   const [title,setTitle] = useState("");
   const [description ,setDescription] = useState("");
   const [dueDate , setDueDate] = useState("");
+
+  const dateform = useRef(null);
+  const calenderon = useRef(null);
+  const calenderoff = useRef(null);
+  const handleDueDate = ()=>{
+    dateform.current.classList.toggle("d-none");
+    calenderon.current.classList.toggle("d-none");
+    calenderoff.current.classList.toggle("d-none");
+  }
+
   const handleClick = (event)=>{
 
     event.preventDefault();
@@ -23,27 +33,22 @@ const { task,setTask,updateTask,setUpdateTask,example,setExample} = useContext(T
     setDueDate("");
   }else{
     const tas = example;
-    tas[updateTask[1]]={title:title,description:description,TimeOfCreation:example[updateTask[1]].TimeOfCreation,done:example[updateTask[1]].done,DueDate:example[updateTask[1]].DueDate};
+    tas[updateTask[1]]={title:title,description:description,TimeOfCreation:example[updateTask[1]].TimeOfCreation,done:example[updateTask[1]].done,DueDate:dueDate};
     setExample(tas);
     setTitle("");
     setDescription("");
     setUpdateTask([]);
   }
+  handleDueDate();
 }
 
   useEffect(()=>{
     setTitle(updateTask[0]);
     setDescription(updateTask[1]);
+    setDueDate(updateTask[2]);
 
   },[updateTask])
-  const dateform = useRef(null);
-  const calenderon = useRef(null);
-  const calenderoff = useRef(null);
-  const handleDueDate = ()=>{
-    dateform.current.classList.toggle("d-none");
-    calenderon.current.classList.toggle("d-none");
-    calenderoff.current.classList.toggle("d-none");
-  }
+  
 
   
   return (

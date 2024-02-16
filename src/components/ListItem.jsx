@@ -17,7 +17,7 @@ const ListItem = (props) => {
     setExample(example.filter((tasks) => example.indexOf(tasks) !== props.name));
   };
   const handleUpdate = () => {
-    setUpdateTask([example[props.name].title, props.name]);
+    setUpdateTask([example[props.name].title, props.name,example[props.name].DueDate]);
   };
 
   const done1 = useRef(null);
