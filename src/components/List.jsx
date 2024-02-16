@@ -1,10 +1,9 @@
 import React, { useContext,useState,useRef} from 'react'
 import ListItem from './ListItem'
 import{ TasksContext }from "../App"
-import { useDrop } from 'react-dnd'
 
 const List = () => {
- const { task,setTask,example,setExample} = useContext(TasksContext);
+ const {example,setExample} = useContext(TasksContext);
  const [searchValue ,setSearchValue] = useState("");
  const [filter,setFilter] = useState("all");
  const [sort,setSort] = useState("added-date");
@@ -15,7 +14,7 @@ const desc = useRef(null);
 var todolists ;
 
         // console.log(task[0][0].includes(searchValue))
-        if(sort=="added-date"){
+        if(sort==="added-date"){
 
           if(!order){
         setExample(example.sort((a,b)=> b.TimeOfCreation-a.TimeOfCreation));
@@ -24,7 +23,7 @@ var todolists ;
       }
 
         }
-        else if(sort=="due-date"){
+        else if(sort==="due-date"){
           if(!order){
           setExample(example.sort((a,b)=> new Date(b.DueDate)-new Date(a.DueDate)));
           }else{
@@ -37,20 +36,20 @@ var todolists ;
 
 
 
-        if(filter=="all"){
+        if(filter==="all"){
           todolists = example.map((item,index)=>(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
        
  }
-        if(filter == "completed"){
+        if(filter === "completed"){
            todolists = example.map((item,index)=>(item.done)&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
        
         }
-        if(filter == "active"){
+        if(filter === "active"){
           todolists = example.map((item,index)=>(!item.done)&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
       
        }
-       if(filter == "has-due-date"){
-        todolists = example.map((item,index)=>(item.DueDate!="")&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
+       if(filter === "has-due-date"){
+        todolists = example.map((item,index)=>(item.DueDate!=="")&&(searchValue===""||item.title.includes(searchValue))&&<ListItem key={index} name ={index} title={ item.title} desc = { item.description} time={ item.TimeOfCreation} duetime={item.DueDate}/>)
     
      }
 

@@ -1,20 +1,12 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { TasksContext } from "../App";
-import { useDrag } from "react-dnd";
-import { format } from "date-fns";
 
 const ListItem = (props) => {
-  const id = props.key;
   const index = props.name;
-  const [, drag] = useDrag({
-    type: "ITEM",
-    item: { id, index },
-  });
 
   const [currtime, setCurrtime] = useState(new Date());
-  const { task, setTask, setUpdateTask,example,setExample } = useContext(TasksContext);
+  const {setUpdateTask,example,setExample } = useContext(TasksContext);
 
-  const [duedate, setDuedate] = useState("");
 
   // useEffect(() => {
   //   console.log((task[props.name][4] = duedate));
@@ -41,14 +33,7 @@ const ListItem = (props) => {
     done2.current.classList.toggle("d-none");
     text.current.classList.toggle("text-muted");
   };
-  const optionList = useRef(null);
-  const onBtn = useRef(null);
-
-  const handleOn = () => {
-    optionList.current.classList.toggle("show");
-    // offBtn.current.style.display ="block";
-    onBtn.current.classList.toggle("fa-xmark");
-  };
+ 
 
 
   useEffect(() => {
@@ -137,7 +122,7 @@ useEffect(()=>{
   if(example[index].DueDate===""){
     ddate.current.classList.add("d-none");
   }
-},[])
+},[index,example])
   return (
     <div >
 <div class="row px-3 align-items-center todo-item rounded">

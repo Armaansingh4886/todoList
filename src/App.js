@@ -1,7 +1,7 @@
 import './App.css';
 import List from './components/List';
 import Add from './components/Add';
-import { createContext,  useEffect,  useState } from 'react';
+import { createContext,    useState } from 'react';
 import { DndProvider } from 'react-dnd';
 
 import { HTML5Backend } from "react-dnd-html5-backend";
